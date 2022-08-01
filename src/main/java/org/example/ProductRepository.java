@@ -1,3 +1,5 @@
+package org.example;
+
 public class ProductRepository {
 
     private Product[] products = new Product[0];

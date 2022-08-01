@@ -1,3 +1,5 @@
+package org.example;
+
 public class Smartphone extends Product {
 
     private String name;

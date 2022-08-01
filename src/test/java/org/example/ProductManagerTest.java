@@ -1,3 +1,6 @@
+package org.example;
+
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -66,8 +69,6 @@ public class ProductManagerTest {
         manager.add(smartphone1);
         manager.add(smartphone2);
 
-        manager.searchBy("bookName3");
-
         Product[] expected = {};
         Product[] actual = manager.searchBy("bookName3");
 
@@ -77,7 +78,10 @@ public class ProductManagerTest {
     // метод определения соответствия товара product запросу search
     @Test
     public void shouldMatch() {
-        manager.matches(smartphone1, "smartphoneName1");
+        manager.add(book1);
+        manager.add(book2);
+        manager.add(smartphone1);
+        manager.add(smartphone2);
 
         boolean expected = true;
         boolean actual = manager.matches(smartphone1, "smartphoneName1");
@@ -87,7 +91,10 @@ public class ProductManagerTest {
 
     @Test
     public void shouldNotMatch() {
-        manager.matches(book1, "smartphoneManufacturer1");
+        manager.add(book1);
+        manager.add(book2);
+        manager.add(smartphone1);
+        manager.add(smartphone2);
 
         boolean expected = false;
         boolean actual = manager.matches(book1, "smartphoneManufacturer1");
