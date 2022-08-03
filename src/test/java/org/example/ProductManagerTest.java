@@ -8,12 +8,33 @@ public class ProductManagerTest {
 
     Book book1 = new Book(11, "bookName1", 1, "bookAuthor1");
     Book book2 = new Book(22, "bookName2", 12, "bookAuthor1");
+    Book book3 = new Book(333, "book3", 100, "bookAuthor3");
+    Book book4 = new Book(4, "bookName2", 90, "bookAuthor2");
+
+
 
     Smartphone smartphone1 = new Smartphone(1, "smartphoneName1", 1, "smartphoneManufacturer1");
     Smartphone smartphone2 = new Smartphone(2, "smartphoneName2", 2, "smartphoneManufacturer2");
     ProductRepository repo = new ProductRepository();
     ProductManager manager = new ProductManager(repo);
 
+    @Test
+    public void shouldAddNothing() {
+
+        Product[] expected = {};
+        Product[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldAddOnlyOneProduct() {
+        manager.add(book1);
+        Product[] expected = {book1};
+        Product[] actual = repo.findAll();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 
     @Test
     public void shouldAddOnlyBooks() {
@@ -71,6 +92,22 @@ public class ProductManagerTest {
 
         Product[] expected = {};
         Product[] actual = manager.searchBy("bookName3");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchSeveralResults() {
+        manager.add(book1);
+        manager.add(book2);
+        manager.add(book3);
+        manager.add(book4);
+
+        manager.add(smartphone1);
+        manager.add(smartphone2);
+
+        Product[] expected = {book1,book2, book4};
+        Product[] actual = manager.searchBy("bookName");
 
         Assertions.assertArrayEquals(expected, actual);
     }
